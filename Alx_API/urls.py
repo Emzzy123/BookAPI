@@ -18,6 +18,7 @@ from django.contrib import admin
 from django.urls import path, include
 from rest_framework.routers import DefaultRouter
 from api.views import BookListCreateAPIView
+from PostAPI.views import PostListCreateAPIView, PostRetrieveUpdateDestroy
 
 router = DefaultRouter()
 router.register(r'books', BookListCreateAPIView, basename='books')
@@ -26,4 +27,6 @@ router.register(r'books', BookListCreateAPIView, basename='books')
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/', include(router.urls)),
+    path('api/posts/', PostListCreateAPIView.as_view(), name='post-list-create'),
+    path('api/posts/<int:pk>/', PostRetrieveUpdateDestroy.as_view(), name='post-retrieve-update-destroy'),
 ]
